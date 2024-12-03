@@ -13,15 +13,27 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailsScreen(
-    date: String
+    date: String,
+    viewModel: DetailsViewModel = koinViewModel()
 ) {
+
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchForecastInfo(date)
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -36,7 +48,7 @@ fun DetailsScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             AsyncImage(
-                model = "https://cdn.weatherapi.com/weather/64x64/day/353.png",
+                model = "https:${uiState.data?.forecast?.dailyForecasts?.first()?.day?.condition?.icon}",
                 contentDescription = "",
                 modifier = Modifier.size(60.dp)
             )

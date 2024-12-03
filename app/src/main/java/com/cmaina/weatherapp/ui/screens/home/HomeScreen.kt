@@ -85,7 +85,7 @@ fun WeatherConditions(
             Spacer(Modifier.weight(0.2f))
 
             AsyncImage(
-                model = data.weatherIconUrl,
+                model = "https:${data.weatherIconUrl}",
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(0.4f),

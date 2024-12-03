@@ -1,5 +1,6 @@
 package com.cmaina.weatherapp.ui.screens.details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.weatherapp.domain.repository.WeatherRepository
@@ -22,6 +23,7 @@ class DetailsViewModel(
             weatherRepository.fetchWeatherInfoForDay(date).collect { result ->
                 result
                     .onSuccess { forecastInfo ->
+                        Log.d("Dirtbag", "fetchForecastInfo: $forecastInfo")
                         _uiState.update {
                             it.copy(
                                 isLoading = false,
@@ -30,6 +32,7 @@ class DetailsViewModel(
                         }
                     }
                     .onFailure {
+                        Log.d("Dirtbag", "failure: $it")
                         _uiState.update {
                             it.copy(
                                 isLoading = false,

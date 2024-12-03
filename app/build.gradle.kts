@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.cmaina.weatherapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -85,6 +85,8 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.compose.calendar)
+    implementation(libs.compose.calendar.kotlinx.datetime)
     ksp(libs.room.compiler)
 
     testImplementation(libs.junit)

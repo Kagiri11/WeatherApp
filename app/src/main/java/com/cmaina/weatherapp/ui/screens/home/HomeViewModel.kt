@@ -1,5 +1,6 @@
 package com.cmaina.weatherapp.ui.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.weatherapp.domain.repository.WeatherRepository
@@ -26,11 +27,13 @@ class HomeViewModel(
             weatherRepository.fetchCurrentWeatherInfo().collect { result ->
                 result
                     .onSuccess { forecastInfo ->
+                        Log.d("Dirtbag", "on success: $forecastInfo")
                         updateLoadingStatus(false)
                         _uiState.update { it.copy(currentWeatherInfo = forecastInfo.currentWeatherInfo) }
                     }
                     .onFailure { throwable ->
                         updateLoadingStatus(false)
+                        Log.d("Dirtbag", "on failure: ${throwable.message}")
                         _uiState.update { it.copy(errorMessage = throwable.message) }
                     }
             }

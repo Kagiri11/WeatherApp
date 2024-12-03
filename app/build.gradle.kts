@@ -79,6 +79,8 @@ dependencies {
     implementation(libs.bundles.coil)
     implementation(libs.bundles.ktor)
     implementation(libs.coroutines.android)
+    implementation(libs.datastore)
+    implementation(libs.gson)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
     implementation(libs.room.runtime)

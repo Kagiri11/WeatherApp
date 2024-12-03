@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+    implementation(libs.gson)
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
 

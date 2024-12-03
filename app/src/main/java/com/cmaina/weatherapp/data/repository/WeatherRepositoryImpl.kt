@@ -3,7 +3,6 @@ package com.cmaina.weatherapp.data.repository
 import android.util.Log
 import com.cmaina.weatherapp.data.local.dao.WeatherDao
 import com.cmaina.weatherapp.data.local.mapper.CurrentForecastResponseToCurrentForecastInfo
-import com.cmaina.weatherapp.data.local.utils.SettingsManager
 import com.cmaina.weatherapp.data.network.api.WeatherApi
 import com.cmaina.weatherapp.domain.models.CurrentForecastInfo
 import com.cmaina.weatherapp.domain.models.ForecastDay
@@ -47,8 +46,4 @@ class WeatherRepositoryImpl(
     override suspend fun saveWeatherInfo(forecastDay: ForecastDay) {
         weatherDao.insertDayForecast(forecastDay)
     }
-
-    override suspend fun shouldShowCelsius() = settingsManager.getTemperatureUnit()
-
-
 }

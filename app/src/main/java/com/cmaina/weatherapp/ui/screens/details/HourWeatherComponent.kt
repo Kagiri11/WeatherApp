@@ -8,23 +8,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil3.compose.AsyncImage
+import com.cmaina.weatherapp.domain.models.Hour
 
 @Composable
-fun HourWeatherItem() {
+fun HourWeatherItem(
+    useCelsius: Boolean = true,
+    hourlyWeatherCondition: Hour
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text("12:00")
+        Text(hourlyWeatherCondition.time)
         Row {
             AsyncImage(
-                model = "https://cdn.weatherapi.com/weather/64x64/day/353.png",
+                model = "https:${hourlyWeatherCondition.condition.icon}",
                 contentDescription = ""
             )
-            Text("Sunny")
+            Text(hourlyWeatherCondition.condition.text)
         }
 
-        Text("17")
+        val temperature = if (useCelsius)
+            hourlyWeatherCondition.temperatureInCelsius else
+            hourlyWeatherCondition.temperatureInFahrenheit
+
+        Text(text = "$temperature")
     }
 }

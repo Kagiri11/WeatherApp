@@ -7,6 +7,6 @@ interface WeatherApi {
 
     suspend fun fetchCurrentWeatherInfo(): Result<CurrentForecastInfoResponse>
 
-    suspend fun fetchHistoricalWeatherInfo(): Result<ForecastInfoResponse>
+    suspend fun fetchHistoricalWeatherInfo(date: String): Result<ForecastInfoResponse>
 
 }

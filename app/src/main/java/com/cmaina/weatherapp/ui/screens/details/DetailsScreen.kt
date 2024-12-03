@@ -46,12 +46,6 @@ fun DetailsScreen(
             Text(text = "Back")
 
             Spacer(modifier = Modifier.weight(1f))
-
-            AsyncImage(
-                model = "https:${uiState.data?.forecast?.dailyForecasts?.first()?.day?.condition?.icon}",
-                contentDescription = "",
-                modifier = Modifier.size(60.dp)
-            )
         }
 
         Text(text = "Sunday, 23 April")

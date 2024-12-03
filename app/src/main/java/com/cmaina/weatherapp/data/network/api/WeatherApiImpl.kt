@@ -24,12 +24,10 @@ class WeatherApiImpl(private val httpClient: HttpClient) : WeatherApi {
                 return Result.success(currentWeatherInfo)
             } else {
                 val errorMessage = response.body<String>()
-                Log.d("Dirtbag", "Error fetching current weather info => $errorMessage")
                 return Result.failure(Exception(errorMessage))
             }
 
         } catch (e: Exception) {
-            Log.d("Dirtbag", "caught ex => ${e.message}")
             return Result.failure(e)
         }
     }

@@ -1,4 +1,4 @@
-package com.cmaina.weatherapp.domain.models
+package com.cmaina.weatherapp.data.network.models
 
 import com.cmaina.weatherapp.data.network.models.Condition
 import kotlinx.serialization.SerialName

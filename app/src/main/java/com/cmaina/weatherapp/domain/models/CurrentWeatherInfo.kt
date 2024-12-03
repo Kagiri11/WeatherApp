@@ -1,5 +1,6 @@
 package com.cmaina.weatherapp.domain.models
 
+import com.cmaina.weatherapp.data.network.models.Condition
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

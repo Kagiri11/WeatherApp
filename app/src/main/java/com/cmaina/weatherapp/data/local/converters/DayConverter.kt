@@ -1,26 +1,23 @@
 package com.cmaina.weatherapp.data.local.converters
 
 import androidx.room.TypeConverter
-import com.cmaina.weatherapp.domain.models.Hour
+import com.cmaina.weatherapp.domain.models.Day
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
-class HoursConverter {
-
+class DayConverter {
     private val gson = Gson()
-    private val type: Type = object : TypeToken<List<Hour>>() {}.type
+    private val type: Type = object : TypeToken<Day>() {}.type
 
     @TypeConverter
-    fun toList(convertedString: String?): List<Hour>? {
+    fun toList(convertedString: String?): Day? {
         return if (convertedString.isNullOrEmpty()) null
         else gson.fromJson(convertedString, type)
     }
 
     @TypeConverter
-    fun toString(hours: List<Hour>): String? {
-        return if (hours.isEmpty()) null
-        else gson.toJson(hours, type)
+    fun toString(day: Day): String? {
+        return gson.toJson(day, type)
     }
-
 }

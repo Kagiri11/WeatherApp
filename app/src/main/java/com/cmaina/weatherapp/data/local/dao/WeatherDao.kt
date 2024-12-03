@@ -8,7 +8,7 @@ import com.cmaina.weatherapp.data.local.entities.ForecastDayEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface DailyForecastDao {
+interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDayForecast(dailyForecast: ForecastDayEntity)

@@ -83,6 +83,7 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+    implementation(libs.koin.compose)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     implementation(libs.compose.calendar)

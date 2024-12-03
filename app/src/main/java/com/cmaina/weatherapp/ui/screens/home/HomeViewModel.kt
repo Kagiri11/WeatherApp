@@ -1,8 +1,8 @@
 package com.cmaina.weatherapp.ui.screens.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cmaina.weatherapp.domain.models.CurrentForecastInfo
 import com.cmaina.weatherapp.domain.repository.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,13 +27,11 @@ class HomeViewModel(
             weatherRepository.fetchCurrentWeatherInfo().collect { result ->
                 result
                     .onSuccess { forecastInfo ->
-                        Log.d("Dirtbag", "on success: $forecastInfo")
                         updateLoadingStatus(false)
-                        _uiState.update { it.copy(currentWeatherInfo = forecastInfo.currentWeatherInfo) }
+                        _uiState.update { it.copy(presentationModel = forecastInfo.toPresentationModel()) }
                     }
                     .onFailure { throwable ->
                         updateLoadingStatus(false)
-                        Log.d("Dirtbag", "on failure: ${throwable.message}")
                         _uiState.update { it.copy(errorMessage = throwable.message) }
                     }
             }
@@ -42,5 +40,15 @@ class HomeViewModel(
 
     private fun updateLoadingStatus(value: Boolean) {
         _uiState.update { it.copy(isLoading = value) }
+    }
+
+    private fun CurrentForecastInfo.toPresentationModel(): HomePresentationModel {
+        return HomePresentationModel(
+            city = this.location.name,
+            dayOfMonth = this.location.localtime,
+            temperature = this.currentWeatherInfo.temperatureInCelsius.toString(),
+            weatherCondition = this.currentWeatherInfo.condition.text,
+            weatherIconUrl = this.currentWeatherInfo.condition.icon
+        )
     }
 }

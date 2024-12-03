@@ -1,5 +1,7 @@
 package com.cmaina.weatherapp.domain.models
 
+import com.cmaina.weatherapp.data.network.models.CurrentWeatherInfo
+import com.cmaina.weatherapp.data.network.models.Location
 import kotlinx.serialization.SerialName
 
 data class CurrentForecastInfo(

@@ -1,5 +1,7 @@
 package com.cmaina.weatherapp.domain.models
 
+import com.cmaina.weatherapp.data.network.models.Day
+import com.cmaina.weatherapp.data.network.models.Hour
 import kotlinx.serialization.Serializable
 
 @Serializable

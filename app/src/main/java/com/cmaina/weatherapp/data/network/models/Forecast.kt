@@ -1,6 +1,5 @@
-package com.cmaina.weatherapp.domain.models
+package com.cmaina.weatherapp.data.network.models
 
-import com.cmaina.weatherapp.data.network.models.ForecastDay
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

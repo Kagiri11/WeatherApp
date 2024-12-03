@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -46,21 +47,20 @@ fun DetailsScreen(
             Text(text = "Back")
 
             Spacer(modifier = Modifier.weight(1f))
-
-            AsyncImage(
-                model = "https:${uiState.data?.forecast?.dailyForecasts?.first()?.day?.condition?.icon}",
-                contentDescription = "",
-                modifier = Modifier.size(60.dp)
-            )
         }
 
         Text(text = "Sunday, 23 April")
 
-        LazyColumn {
-            items(24) {
-                HourWeatherItem()
+        uiState.data?.hour?.let { hourlyWeatherConditions ->
+            val useCelsius = uiState.shouldUseCelsius
+            LazyColumn {
+                items(hourlyWeatherConditions) { hourlyWeatherCondition ->
+                    HourWeatherItem(
+                        hourlyWeatherCondition = hourlyWeatherCondition,
+                        useCelsius = useCelsius
+                    )
+                }
             }
         }
-
     }
 }

@@ -32,13 +32,13 @@ class WeatherApiImpl(private val httpClient: HttpClient) : WeatherApi {
         }
     }
 
-    override suspend fun fetchHistoricalWeatherInfo(): Result<ForecastInfoResponse> {
+    override suspend fun fetchHistoricalWeatherInfo(date: String): Result<ForecastInfoResponse> {
         try {
             val response = httpClient.get(Constants.WEATHER_HISTORY_ENDPOINT) {
                 url {
                     parameters.append("key", Constants.API_KEY)
                     parameters.append("q", "Nairobi")
-                    parameters.append("dt", "2024-11-28")
+                    parameters.append("dt", date)
                 }
             }
 

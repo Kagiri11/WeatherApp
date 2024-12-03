@@ -6,10 +6,10 @@ import androidx.room.TypeConverters
 import com.cmaina.weatherapp.data.local.converters.DayConverter
 import com.cmaina.weatherapp.data.local.converters.HoursConverter
 import com.cmaina.weatherapp.data.local.dao.WeatherDao
-import com.cmaina.weatherapp.data.local.entities.ForecastDayEntity
+import com.cmaina.weatherapp.domain.models.ForecastDay
 
 @Database(
-    entities = [ForecastDayEntity::class],
+    entities = [ForecastDay::class],
     version = 1,
     exportSchema = false
 )

@@ -19,7 +19,7 @@ fun formatDateTime(
 
 fun formatTimeToAmOrPm(inputDateTime: String): String {
     val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.getDefault())
-    val outputFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH)
+    val outputFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.getDefault())
 
     val dateTime = LocalDateTime.parse(inputDateTime, inputFormatter)
     return dateTime.format(outputFormatter)

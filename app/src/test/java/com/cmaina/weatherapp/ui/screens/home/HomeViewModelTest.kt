@@ -1,8 +1,8 @@
 package com.cmaina.weatherapp.ui.screens.home
 
 import com.cmaina.weatherapp.data.local.mapper.CurrentForecastResponseToCurrentForecastInfo
-import com.cmaina.weatherapp.data.network.models.Condition
 import com.cmaina.weatherapp.data.network.models.CurrentForecastInfoResponse
+import com.cmaina.weatherapp.domain.models.Condition
 import com.cmaina.weatherapp.domain.models.CurrentWeatherInfo
 import com.cmaina.weatherapp.domain.models.Location
 import com.cmaina.weatherapp.domain.repository.SettingsRepository

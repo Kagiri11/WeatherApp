@@ -2,8 +2,8 @@ package com.cmaina.weatherapp.data.repository
 
 import com.cmaina.weatherapp.data.local.dao.WeatherDao
 import com.cmaina.weatherapp.data.network.api.WeatherApi
-import com.cmaina.weatherapp.data.network.models.Condition
 import com.cmaina.weatherapp.data.network.models.ForecastInfoResponse
+import com.cmaina.weatherapp.domain.models.Condition
 import com.cmaina.weatherapp.domain.models.Day
 import com.cmaina.weatherapp.domain.models.Forecast
 import com.cmaina.weatherapp.domain.models.ForecastDay

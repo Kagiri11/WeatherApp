@@ -22,8 +22,9 @@ class WeatherApiImpl(private val httpClient: HttpClient) : WeatherApi {
                 val currentWeatherInfo: CurrentForecastInfoResponse = response.body()
                 return Result.success(currentWeatherInfo)
             } else {
-                val errorMessage = response.body<String>()
-                return Result.failure(Exception(errorMessage))
+                val error = response.body<String>()
+                val formattedErrorMessage = error.asFormattedErrorMessage()
+                return Result.failure(Exception(formattedErrorMessage))
             }
 
         } catch (e: Exception) {
@@ -46,11 +47,15 @@ class WeatherApiImpl(private val httpClient: HttpClient) : WeatherApi {
                 return Result.success(currentWeatherInfo)
             } else {
                 val error = response.body<String>()
-                val errorMessage = error.substringAfterLast("message\":\"").substringBefore("\"}")
-                return Result.failure(Exception(errorMessage))
+                val formattedErrorMessage = error.asFormattedErrorMessage()
+                return Result.failure(Exception(formattedErrorMessage))
             }
         } catch (e: Exception) {
             return Result.failure(e)
         }
+    }
+
+    private fun String.asFormattedErrorMessage(): String{
+        return this.substringAfterLast("message\":\"").substringBefore("\"}")
     }
 }

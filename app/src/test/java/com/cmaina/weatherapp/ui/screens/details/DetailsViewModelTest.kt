@@ -1,6 +1,6 @@
 package com.cmaina.weatherapp.ui.screens.details
 
-import com.cmaina.weatherapp.data.network.models.Condition
+import com.cmaina.weatherapp.domain.models.Condition
 import com.cmaina.weatherapp.domain.models.Day
 import com.cmaina.weatherapp.domain.models.ForecastDay
 import com.cmaina.weatherapp.domain.repository.SettingsRepository

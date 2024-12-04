@@ -9,10 +9,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,8 +50,11 @@ fun DetailsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
                 modifier = Modifier.clickable { onBackClicked() },
@@ -55,13 +64,37 @@ fun DetailsScreen(
             Text(text = "Back")
 
             Spacer(modifier = Modifier.weight(1f))
+
+
         }
 
-        uiState.data?.date?.let { date ->
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = formatDateTime(date, outputPattern = "EEEE, d MMMM")
-            )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            uiState.data?.date?.let { date ->
+                Text(
+                    modifier = Modifier,
+                    text = formatDateTime(date, outputPattern = "EEEE, d MMMM"),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+
+            if (uiState.data?.isFromCache == true) {
+                Card(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(10.dp),
+                    shape = RoundedCornerShape(10)
+                ) {
+                    Text(text = "From Cache")
+                }
+            }
+
         }
 
         uiState.data?.hour?.let { hourlyWeatherConditions ->

@@ -24,7 +24,7 @@ class HomeViewModel(
         fetchPreferredTemperatureUnit()
     }
 
-    private fun fetchCurrentWeatherInfo() {
+    fun fetchCurrentWeatherInfo() {
         updateLoadingStatus(true)
         viewModelScope.launch {
             weatherRepository.fetchCurrentWeatherInfo().collect { result ->
@@ -47,7 +47,7 @@ class HomeViewModel(
         }
     }
 
-    private fun fetchPreferredTemperatureUnit() {
+    fun fetchPreferredTemperatureUnit() {
         viewModelScope.launch {
             settingsRepository.shouldShowCelsius().collect { isCelsius ->
                 _uiState.update { it.copy(shouldUseCelsius = isCelsius) }

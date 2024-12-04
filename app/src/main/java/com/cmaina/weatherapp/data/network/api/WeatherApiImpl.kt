@@ -1,6 +1,5 @@
 package com.cmaina.weatherapp.data.network.api
 
-import android.util.Log
 import com.cmaina.weatherapp.data.network.models.CurrentForecastInfoResponse
 import com.cmaina.weatherapp.data.network.models.ForecastInfoResponse
 import com.cmaina.weatherapp.utils.Constants
@@ -46,10 +45,10 @@ class WeatherApiImpl(private val httpClient: HttpClient) : WeatherApi {
                 val currentWeatherInfo: ForecastInfoResponse = response.body()
                 return Result.success(currentWeatherInfo)
             } else {
-                val errorMessage = response.body<String>()
+                val error = response.body<String>()
+                val errorMessage = error.substringAfterLast("message\":\"").substringBefore("\"}")
                 return Result.failure(Exception(errorMessage))
             }
-
         } catch (e: Exception) {
             return Result.failure(e)
         }

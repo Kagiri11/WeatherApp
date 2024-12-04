@@ -1,6 +1,5 @@
 package com.cmaina.weatherapp.ui.screens.details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.weatherapp.domain.models.ForecastDay
@@ -38,8 +37,7 @@ class DetailsViewModel(
                         }
                         saveWeatherInfo(forecast)
                     }
-                    .onFailure {throwable ->
-                        Log.d("Dirtbag","Error: ${throwable.message}")
+                    .onFailure { throwable ->
                         _uiState.update {
                             it.copy(
                                 isLoading = false,

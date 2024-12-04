@@ -70,13 +70,17 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(horizontal = 10.dp)
         ) {
-            Row {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(
+                    modifier = Modifier.weight(1f),
                     text = stringResource(R.string.select_a_date_to_view_weather_conditions),
                 )
-                Spacer(Modifier.weight(1f))
+                Spacer(Modifier.width(20.dp))
                 uiState.shouldUseCelsius?.let {
                     TemperatureSwitch(
+                        modifier = Modifier.weight(1f),
                         initialSwitchState = it,
                         onCheckedChange = {
                             viewModel.changeTemperatureUnit(it)
@@ -107,6 +111,14 @@ fun HomeScreen(
                         .size(100.dp)
                 )
             }
+
+            uiState.errorMessage?.let {
+                Text(
+                    modifier = Modifier.weight(0.4f),
+                    text = it
+                )
+            }
+
             uiState.presentationModel?.let {
                 WeatherConditions(
                     modifier = Modifier.weight(0.4f),
@@ -149,7 +161,7 @@ fun WeatherConditions(
             ) {
                 Text(
                     text = if (useCelsius) data.temperatureInCelsius else data.temperatureInFahrenheit,
-                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 60.sp)
+                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 40.sp)
                 )
                 Text(text = data.weatherCondition)
             }
@@ -168,10 +180,15 @@ fun WeatherConditions(
 }
 
 @Composable
-fun TemperatureSwitch(initialSwitchState: Boolean, onCheckedChange: (Boolean) -> Unit) {
+fun TemperatureSwitch(
+    initialSwitchState: Boolean,
+    modifier: Modifier,
+    onCheckedChange: (Boolean) -> Unit
+) {
     var checked by remember { mutableStateOf(initialSwitchState) }
 
     Row(
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = if (checked) stringResource(R.string.celsius) else stringResource(R.string.fahrenheit))

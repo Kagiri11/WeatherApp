@@ -77,9 +77,7 @@ fun DetailsScreen(
             )
             Spacer(Modifier.width(20.dp))
             Text(text = stringResource(R.string.back))
-
             Spacer(modifier = Modifier.weight(1f))
-
         }
 
         Row(
@@ -114,9 +112,15 @@ fun DetailsScreen(
         if (uiState.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(50.dp)
                     .align(Alignment.CenterHorizontally)
             )
+        }
+
+        uiState.errorMessage?.let {
+            if (it.isNotEmpty()) {
+                Text(text = it)
+            }
         }
 
         uiState.data?.hour?.let { hourlyWeatherConditions ->

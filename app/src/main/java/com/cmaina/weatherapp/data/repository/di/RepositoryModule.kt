@@ -11,6 +11,6 @@ val repositoryModule = module {
     factory<WeatherRepository> {
         WeatherRepositoryImpl(weatherApi = get(), weatherDao = get())
     }
-    factory<SettingsRepository> { SettingsRepositoryImpl(settingsManager = get()) }
     factory { SettingsManager(context = get()) }
+    factory<SettingsRepository> { SettingsRepositoryImpl(settingsManager = get()) }
 }

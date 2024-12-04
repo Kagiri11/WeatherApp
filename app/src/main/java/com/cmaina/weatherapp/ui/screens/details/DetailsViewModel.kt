@@ -38,11 +38,12 @@ class DetailsViewModel(
                         }
                         saveWeatherInfo(forecast)
                     }
-                    .onFailure {
+                    .onFailure {throwable ->
+                        Log.d("Dirtbag","Error: ${throwable.message}")
                         _uiState.update {
                             it.copy(
                                 isLoading = false,
-                                errorMessage = it.errorMessage
+                                errorMessage = throwable.message
                             )
                         }
                     }

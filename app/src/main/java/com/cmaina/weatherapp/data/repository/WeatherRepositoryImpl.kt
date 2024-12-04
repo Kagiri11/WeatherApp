@@ -22,11 +22,7 @@ class WeatherRepositoryImpl(
         } else {
             flowOf(
                 weatherApi.fetchHistoricalWeatherInfo(date = date).map { response ->
-                    ForecastDay(
-                        day = response.forecast.dailyForecasts.first().day,
-                        date = response.forecast.dailyForecasts.first().date,
-                        hour = response.forecast.dailyForecasts.first().hour
-                    )
+                    response.forecast.dailyForecasts.first()
                 }
             )
         }

@@ -19,5 +19,3 @@ data class Hour(
     val humidity: Int,
     val time: String,
 )
-
-// TODO: Rename this to HourlyWeatherCondition

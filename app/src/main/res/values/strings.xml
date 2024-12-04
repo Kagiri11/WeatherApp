@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="back">Back</string>
+    <string name="arrow_back">arrow back</string>
+    <string name="from_cache">From Cache</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="select_a_date_to_view_weather_conditions">Select a date to \nview weather conditions</string>
 </resources>

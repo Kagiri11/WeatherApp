@@ -68,7 +68,7 @@ fun HourWeatherItem(
 
             Text(
                 modifier = Modifier.weight(1f),
-                text = "$temperature",
+                text = temperature,
                 style = MaterialTheme.typography.titleLarge.copy(
                     textAlign = TextAlign.End
                 )

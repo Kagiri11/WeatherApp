@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,7 +24,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.cmaina.weatherapp.R
 import com.cmaina.weatherapp.utils.formatDateTime
 import org.koin.androidx.compose.koinViewModel
 
@@ -59,9 +59,9 @@ fun DetailsScreen(
             Image(
                 modifier = Modifier.clickable { onBackClicked() },
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = ""
+                contentDescription = stringResource(R.string.arrow_back)
             )
-            Text(text = "Back")
+            Text(text = stringResource(R.string.back))
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -91,7 +91,7 @@ fun DetailsScreen(
                         .padding(10.dp),
                     shape = RoundedCornerShape(10)
                 ) {
-                    Text(text = "From Cache")
+                    Text(text = stringResource(R.string.from_cache))
                 }
             }
 

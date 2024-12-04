@@ -23,10 +23,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.cmaina.weatherapp.R
 import com.cmaina.weatherapp.utils.formatDateTime
 import io.github.boguszpawlowski.composecalendar.SelectableCalendar
 import io.github.boguszpawlowski.composecalendar.rememberSelectableCalendarState
@@ -57,7 +59,7 @@ fun HomeScreen(
         ) {
             Row {
                 Text(
-                    text = "Select a date to \nview weather conditions",
+                    text = stringResource(R.string.select_a_date_to_view_weather_conditions),
                 )
                 Spacer(Modifier.weight(1f))
                 TemperatureSwitch(
@@ -148,7 +150,7 @@ fun TemperatureSwitch(initialSwitchState: Boolean, onCheckedChange: (Boolean) ->
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = if (checked) "Celsius" else "Fahrenheit")
+        Text(text = if (checked) stringResource(R.string.celsius) else stringResource(R.string.fahrenheit))
         Switch(
             checked = checked,
             onCheckedChange = {

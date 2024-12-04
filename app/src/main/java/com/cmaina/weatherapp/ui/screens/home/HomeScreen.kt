@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -87,7 +88,8 @@ fun HomeScreen(
             SelectableCalendar(
                 modifier = Modifier
                     .weight(0.5f)
-                    .padding(horizontal = 10.dp, vertical = 5.dp), calendarState = calendarState,
+                    .padding(horizontal = 10.dp, vertical = 5.dp),
+                calendarState = calendarState,
                 monthHeader = {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
@@ -159,7 +161,7 @@ fun WeatherConditions(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(0.3f),
-                contentDescription = ""
+                contentDescription = stringResource(R.string.weather_icon)
             )
         }
     }
@@ -173,6 +175,7 @@ fun TemperatureSwitch(initialSwitchState: Boolean, onCheckedChange: (Boolean) ->
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = if (checked) stringResource(R.string.celsius) else stringResource(R.string.fahrenheit))
+        Spacer(Modifier.width(5.dp))
         Switch(
             checked = checked,
             onCheckedChange = {

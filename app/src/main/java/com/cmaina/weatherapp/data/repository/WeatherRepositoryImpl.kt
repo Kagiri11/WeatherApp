@@ -1,6 +1,5 @@
 package com.cmaina.weatherapp.data.repository
 
-import android.util.Log
 import com.cmaina.weatherapp.data.local.dao.WeatherDao
 import com.cmaina.weatherapp.data.local.mapper.CurrentForecastResponseToCurrentForecastInfo
 import com.cmaina.weatherapp.data.network.api.WeatherApi
@@ -19,17 +18,11 @@ class WeatherRepositoryImpl(
     override suspend fun fetchWeatherInfoForDay(date: String): Flow<Result<ForecastDay>> {
         val cachedData = weatherDao.getDayForecast(date).firstOrNull()
         return if (cachedData != null) {
-            Log.d("Dirtbag", "Data was cached: $cachedData")
             flowOf(Result.success(cachedData))
         } else {
-            Log.d("Dirtbag", "Data wasn't cached; fetching from network")
             flowOf(
                 weatherApi.fetchHistoricalWeatherInfo(date = date).map { response ->
-                    ForecastDay(
-                        day = response.forecast.dailyForecasts.first().day,
-                        date = response.forecast.dailyForecasts.first().date,
-                        hour = response.forecast.dailyForecasts.first().hour
-                    )
+                    response.forecast.dailyForecasts.first()
                 }
             )
         }

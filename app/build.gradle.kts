@@ -40,7 +40,7 @@ android {
         }
 
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -88,6 +88,8 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.compose.calendar)
     implementation(libs.compose.calendar.kotlinx.datetime)
+    implementation(libs.security.crypto)
+    implementation(libs.database.sqlcipher)
     ksp(libs.room.compiler)
 
     testImplementation(libs.junit)

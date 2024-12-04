@@ -2,8 +2,10 @@ package com.cmaina.weatherapp.data.local.di
 
 import androidx.room.Room
 import com.cmaina.weatherapp.data.local.WeatherAppDatabase
+import net.sqlcipher.database.SupportFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import java.util.UUID
 
 val localModule = module {
     /**
@@ -14,7 +16,10 @@ val localModule = module {
             androidContext(),
             WeatherAppDatabase::class.java,
             "weather_app_database"
-        ).build()
+        )
+            .openHelperFactory(factory = SupportFactory(UUID.randomUUID().toString().toByteArray()))
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     /**

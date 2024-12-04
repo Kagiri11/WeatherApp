@@ -20,13 +20,16 @@ class DetailsViewModel(
     private val _uiState = MutableStateFlow(DetailsUiState())
     val uiState: StateFlow<DetailsUiState> = _uiState.asStateFlow()
 
+    init {
+        fetchPreferredTemperatureUnit()
+    }
+
     fun fetchForecastInfo(date: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             weatherRepository.fetchWeatherInfoForDay(date).collect { result ->
                 result
                     .onSuccess { forecast ->
-                        Log.d("Dirtbag", "fetchForecastInfo: $forecast")
                         _uiState.update {
                             it.copy(
                                 isLoading = false,
@@ -36,7 +39,6 @@ class DetailsViewModel(
                         saveWeatherInfo(forecast)
                     }
                     .onFailure {
-                        Log.d("Dirtbag", "failure: $it")
                         _uiState.update {
                             it.copy(
                                 isLoading = false,
@@ -54,7 +56,7 @@ class DetailsViewModel(
         }
     }
 
-    fun fetchPreferredTemperatureUnit() {
+    private fun fetchPreferredTemperatureUnit() {
         viewModelScope.launch {
             settingsRepository.shouldShowCelsius().collect { isCelsius ->
                 _uiState.update { it.copy(shouldUseCelsius = isCelsius) }

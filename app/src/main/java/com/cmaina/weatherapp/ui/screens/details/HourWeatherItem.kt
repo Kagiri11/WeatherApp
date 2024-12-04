@@ -18,11 +18,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.cmaina.weatherapp.domain.models.Hour
+import com.cmaina.weatherapp.utils.formatDateTime
+import com.cmaina.weatherapp.utils.formatTimeToAmOrPm
 
 @Composable
 fun HourWeatherItem(
@@ -37,11 +38,16 @@ fun HourWeatherItem(
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 5.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = hourlyWeatherCondition.time, modifier = Modifier.weight(1f))
+            Text(
+                text = formatTimeToAmOrPm(inputDateTime = hourlyWeatherCondition.time),
+                modifier = Modifier.weight(1f)
+            )
             Row(
                 modifier = Modifier
                     .weight(1f),
@@ -57,8 +63,8 @@ fun HourWeatherItem(
             }
 
             val temperature = if (useCelsius)
-                hourlyWeatherCondition.temperatureInCelsius else
-                hourlyWeatherCondition.temperatureInFahrenheit
+                "${hourlyWeatherCondition.temperatureInCelsius}°C" else
+                "${hourlyWeatherCondition.temperatureInFahrenheit}°F"
 
             Text(
                 modifier = Modifier.weight(1f),

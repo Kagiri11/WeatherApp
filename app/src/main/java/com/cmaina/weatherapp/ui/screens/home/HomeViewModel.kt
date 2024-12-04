@@ -3,6 +3,7 @@ package com.cmaina.weatherapp.ui.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.weatherapp.domain.models.CurrentForecastInfo
+import com.cmaina.weatherapp.domain.repository.SettingsRepository
 import com.cmaina.weatherapp.domain.repository.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +12,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -19,6 +21,7 @@ class HomeViewModel(
 
     init {
         fetchCurrentWeatherInfo()
+        fetchPreferredTemperatureUnit()
     }
 
     private fun fetchCurrentWeatherInfo() {
@@ -38,6 +41,20 @@ class HomeViewModel(
         }
     }
 
+    fun changeTemperatureUnit(useCelsius: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.setTemperatureUnit(useCelsius)
+        }
+    }
+
+    private fun fetchPreferredTemperatureUnit() {
+        viewModelScope.launch {
+            settingsRepository.shouldShowCelsius().collect { isCelsius ->
+                _uiState.update { it.copy(shouldUseCelsius = isCelsius) }
+            }
+        }
+    }
+
     private fun updateLoadingStatus(value: Boolean) {
         _uiState.update { it.copy(isLoading = value) }
     }
@@ -46,7 +63,8 @@ class HomeViewModel(
         return HomePresentationModel(
             city = this.location.name,
             dayOfMonth = this.location.localtime,
-            temperature = this.currentWeatherInfo.temperatureInCelsius.toString(),
+            temperatureInCelsius = "${this.currentWeatherInfo.temperatureInCelsius}°C",
+            temperatureInFahrenheit = "${this.currentWeatherInfo.temperatureInFahrenheit}°F",
             weatherCondition = this.currentWeatherInfo.condition.text,
             weatherIconUrl = this.currentWeatherInfo.condition.icon
         )

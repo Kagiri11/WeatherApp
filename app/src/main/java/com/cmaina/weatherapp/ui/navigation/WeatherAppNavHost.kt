@@ -32,7 +32,12 @@ fun WeatherAppNavHost(modifier: Modifier) {
 
         composable<Details> { backStackEntry ->
             val details: Details = backStackEntry.toRoute()
-            DetailsScreen(date = details.date)
+            DetailsScreen(
+                date = details.date,
+                onBackClicked = {
+                    navController.navigateUp()
+                }
+            )
         }
 
     }

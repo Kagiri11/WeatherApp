@@ -58,7 +58,7 @@ fun DetailsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 10.dp),
+            .padding(start = 10.dp, end = 10.dp, top = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
@@ -70,8 +70,7 @@ fun DetailsScreen(
         ) {
             Image(
                 modifier = Modifier
-                    .clickable { onBackClicked() }
-                    .size(40.dp),
+                    .clickable { onBackClicked() },
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = stringResource(R.string.arrow_back)
             )

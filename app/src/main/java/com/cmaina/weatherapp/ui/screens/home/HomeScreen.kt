@@ -1,6 +1,7 @@
 package com.cmaina.weatherapp.ui.screens.home
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -189,7 +190,8 @@ fun TemperatureSwitch(
 
     Row(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End
     ) {
         Text(text = if (checked) stringResource(R.string.celsius) else stringResource(R.string.fahrenheit))
         Spacer(Modifier.width(5.dp))
